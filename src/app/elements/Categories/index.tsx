@@ -13,9 +13,16 @@ type PropTypes = {
 };
 
 export const Categories: FC<PropTypes> = (): ReactElement => {
-  const { categories } = useCategories();
+  const { categories, resetCurrentCategory } = useCategories();
 
   const categoriesJSX = categories.results.map((category) => <CategoryTile category={category} />);
 
-  return <section className={Styles.categories}>{categoriesJSX}</section>;
+  return (
+    <section className={Styles.categories}>
+      {categoriesJSX}
+      <button type="button" onClick={resetCurrentCategory}>
+        &times;
+      </button>
+    </section>
+  );
 };

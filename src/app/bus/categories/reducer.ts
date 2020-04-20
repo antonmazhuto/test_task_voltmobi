@@ -6,14 +6,18 @@ import {
   CATEGORIES_STOP_FETCHING,
   CategoriesActionTypes,
   FILL_CATEGORIES,
+  RESET_CATEGORY,
+  SET_CURRENT_CATEGORY,
 } from './type';
 
 export type CategoriesState = {
+  currentCategory: number | null;
   data: Categories;
   isFetching: boolean;
 };
 
 const initialState: CategoriesState = {
+  currentCategory: null,
   data: {
     results: [],
   },
@@ -37,6 +41,18 @@ export const categoriesReducer = (
         data: {
           ...action.payload,
         },
+      };
+
+    case SET_CURRENT_CATEGORY:
+      return {
+        ...state,
+        currentCategory: action.payload.id,
+      };
+
+    case RESET_CATEGORY:
+      return {
+        ...state,
+        currentCategory: null,
       };
 
     case CATEGORIES_FETCH_ASYNC:

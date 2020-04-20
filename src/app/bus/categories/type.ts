@@ -24,6 +24,17 @@ export type CategoriesFillAction = {
   payload: Categories;
 };
 
+export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
+export type SetCurrentCategoryAction = {
+  type: typeof SET_CURRENT_CATEGORY;
+  payload: Category;
+};
+
+export const RESET_CATEGORY = 'RESET_CATEGORY';
+export type ResetCategoryAction = {
+  type: typeof RESET_CATEGORY;
+};
+
 // Async
 export const CATEGORIES_FETCH_ASYNC = 'CATEGORIES_FETCH_ASYNC';
 type CategoriesFetchAsyncAction = {
@@ -34,4 +45,6 @@ export type CategoriesActionTypes =
   | CategoriesStartFetchingAction
   | CategoriesFillAction
   | CategoriesStopFetchingAction
+  | SetCurrentCategoryAction
+  | ResetCategoryAction
   | CategoriesFetchAsyncAction;

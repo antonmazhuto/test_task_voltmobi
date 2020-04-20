@@ -1,7 +1,6 @@
 // Types
 import {
   Order,
-  ORDER_CLEAR_FORM,
   ORDER_FILL,
   ORDER_START_FETCHING,
   ORDER_STOP_FETCHING,
@@ -25,11 +24,5 @@ export function orderStartFetching(): OrderActionTypes {
 export function orderStopFetching(): OrderActionTypes {
   return {
     type: ORDER_STOP_FETCHING,
-  };
-}
-
-export function orderClearForm(): OrderActionTypes {
-  return {
-    type: ORDER_CLEAR_FORM,
   };
 }

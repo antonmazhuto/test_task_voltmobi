@@ -16,8 +16,15 @@ type HookUseMainType = () => {
 
 export const useMain: HookUseMainType = () => {
   const dispatch = useDispatch();
+
   const products = useSelector<AppState, Products>((state) => state.feed.data);
+  const filtered = useSelector<AppState, Products>((state) => state.feed.filtered);
   const isFetching = useSelector<AppState, boolean>((state) => state.feed.isFetching);
+  const category = useSelector<AppState, number | null>(
+    (state) => state.categories.currentCategory,
+  );
+
+  const finalProducts = category ? filtered : products;
 
   const fetchPostsAsync = (): void => {
     dispatch(fetchProductsAsync());
@@ -28,7 +35,7 @@ export const useMain: HookUseMainType = () => {
   }, []);
 
   return {
-    products,
+    products: finalProducts,
     isFetching,
   };
 };

@@ -2,11 +2,10 @@
 import React, { ReactElement } from 'react';
 import cx from 'classnames';
 import {
-  Field,
   WrappedFieldProps,
   WrappedFieldMetaProps,
-  WrappedFieldArrayProps,
 } from 'redux-form';
+import MaskedInput from 'react-text-mask';
 
 type CustomFieldProps = {
   type?: string;
@@ -58,31 +57,42 @@ export const customInput = (props: CustomFieldType): ReactElement => {
   );
 };
 
-export const discounts = ({ fields }: WrappedFieldArrayProps): ReactElement => (
-  <div className="custom-field-array-container">
-    {fields.map((code, index) => (
-      <div key={index.toString()} className="field-array-item">
-        <Field
-          name={code}
-          type="text"
-          component={customInput}
-          label={`Discount Code #${index + 1}`}
-          autoFocus
-        />
-        <button type="button" onClick={(): void => fields.remove(index)}>
-          &times;
-        </button>
-      </div>
-    ))}
-    <button
-      type="button"
-      onClick={(): void => {
-        fields.push('Value');
-      }}
+const phoneNumberMask = [
+  '8',
+  '(',
+  /[1-9]/,
+  /\d/,
+  /\d/,
+  ')',
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  '-',
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+];
+
+export const numberInput = (props: CustomFieldType): ReactElement => {
+  const {
+    label, input, type, meta,
+  } = props;
+  return (
+    <div
+      className={cx(
+        'custom-input-container',
+        { 'flex-row-reverse': type === 'checkbox' },
+        { dirty: meta.dirty },
+        getValidityClassName(meta),
+      )}
     >
-      Add
-      {' '}
-      {!fields.length ? 'Discount Code(s)' : 'Another'}
-    </button>
-  </div>
-);
+      <label htmlFor="currentInput">{label}</label>
+      <MaskedInput {...input} type={type} id="numberInput" mask={phoneNumberMask} />
+      {meta.error && meta.touched && !meta.active && (
+        <div className="feedback-text error-text">{meta.error}</div>
+      )}
+    </div>
+  );
+};

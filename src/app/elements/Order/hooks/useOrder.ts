@@ -3,12 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Actions
 import { push } from 'connected-react-router';
-import {
-  fillOrder,
-  orderStartFetching,
-  orderStopFetching,
-  orderClearForm,
-} from '../../../bus/order/actions';
+import { reset } from 'redux-form';
+import { fillOrder, orderStartFetching, orderStopFetching } from '../../../bus/order/actions';
 
 // Types
 import { AppState } from '../../../init/rootReducer';
@@ -28,12 +24,14 @@ export const useOrder: HookUseProfileType = () => {
   const submit = (values: Order): void => {
     dispatch(orderStartFetching());
     dispatch(fillOrder(values));
+    // eslint-disable-next-line no-alert
+    alert('Заказ успешно оформлен!');
 
     setTimeout(() => {
-      alert('Заказ успешно оформлен!');
       dispatch(orderStopFetching());
+      dispatch(reset('order'));
+      dispatch(push('/'));
     }, 500);
-    dispatch(push('/'));
   };
 
   const basket = useSelector<AppState, Basket>((state) => state.basket.data);
@@ -42,7 +40,7 @@ export const useOrder: HookUseProfileType = () => {
   order.products = basket.products;
 
   const clearOrder = (): void => {
-    dispatch(orderClearForm());
+    dispatch(reset('order'));
   };
 
   return {

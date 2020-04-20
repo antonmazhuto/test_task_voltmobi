@@ -7,6 +7,9 @@ import { Category } from '../../bus/categories/type';
 // Hooks
 import { useCategoriesTile } from './hooks/useCategoriesTile';
 
+// Styles
+import Styles from './styles.module.css';
+
 type PropTypes = {
   category: Category;
   children?: never;
@@ -15,10 +18,20 @@ type PropTypes = {
 export const CategoryTile: FC<PropTypes> = ({ category }: PropTypes): ReactElement => {
   const { id, title } = category;
 
-  const { filterProds } = useCategoriesTile(category);
+  const { filterProds, setCurrentCategory, currentCategory } = useCategoriesTile(category);
+
+  const handleClick = (): void => {
+    filterProds();
+    setCurrentCategory();
+  };
 
   return (
-    <button key={id} type="button" onClick={filterProds}>
+    <button
+      key={id}
+      className={id === currentCategory ? Styles.active : ''}
+      type="button"
+      onClick={handleClick}
+    >
       {title}
     </button>
   );

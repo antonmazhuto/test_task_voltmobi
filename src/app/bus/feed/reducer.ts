@@ -11,11 +11,15 @@ import {
 
 export type FeedState = {
   data: Products;
+  filtered: Products;
   isFetching: boolean;
 };
 
 const initialState: FeedState = {
   data: {
+    results: [],
+  },
+  filtered: {
     results: [],
   },
   isFetching: false,
@@ -43,7 +47,7 @@ export const feedReducer = (state = initialState, action: FeedActionTypes): Feed
     case FEED_FILTER_PRODUCTS:
       return {
         ...state,
-        data: {
+        filtered: {
           results: state.data.results.filter((r) => r.categories.includes(action.payload.id)),
         },
       };

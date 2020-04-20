@@ -26,18 +26,18 @@ export const Nav: FC<PropTypes> = (props: PropTypes): ReactElement => {
   } = props;
   return (
     <section className={Styles.nav}>
-      <div className="menu">
+      <div>
         {pathname === routes.root ? null : (
           <button type="button" onClick={navigateToRoot}>
             Главная
           </button>
         )}
       </div>
-      <div className="cart">
+      <div>
         <button type="button" onClick={navigateToBasket}>
           Корзина
         </button>
-        <div style={{ color: 'white' }}>
+        <div>
           <span>
             Товаров:
             {basket.count}

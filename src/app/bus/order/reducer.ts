@@ -1,7 +1,6 @@
 // Types
 import {
   Order,
-  ORDER_CLEAR_FORM,
   ORDER_FILL,
   ORDER_START_FETCHING,
   ORDER_STOP_FETCHING,
@@ -37,17 +36,6 @@ export const orderReducer = (state = initialState, action: OrderActionTypes): Or
       return { ...state, isFetching: true };
     case ORDER_STOP_FETCHING:
       return { ...state, isFetching: false };
-    case ORDER_CLEAR_FORM:
-      return {
-        ...state,
-        data: {
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          products: [],
-        },
-      };
     default:
       // eslint-disable-next-line no-case-declarations,@typescript-eslint/no-unused-vars
       const x: never = action;

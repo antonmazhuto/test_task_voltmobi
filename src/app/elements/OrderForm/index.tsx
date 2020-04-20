@@ -1,33 +1,39 @@
 // Core
 import React, { ReactElement } from 'react';
-import {
-  Field, reduxForm, FieldArray, InjectedFormProps,
-} from 'redux-form';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import capitalize from 'capitalize';
+import { validate } from './validate';
 
 // Custom Fields
-import { customInput, discounts } from '../Fields';
+import { customInput, numberInput } from '../Fields';
 
 // Validators
-import { required, asyncValidate } from './validation';
+import { required } from './validation';
+
+// Types
+import { Product } from '../../bus/feed/types';
 
 // Styles
 import './styles.module.css';
 
 export interface FormProps {
   firstName: string;
-  surname: string;
-  username: string;
-  password: string;
-  confirmPassword: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  products: Product[];
 }
 
 export interface DispatchProps {
   handleSubmit: (values: FormProps) => void;
+  handleClear: () => void;
 }
 
 const OrderComponent = ({
   handleSubmit,
+  handleClear,
+  pristine,
+  submitting,
 }: DispatchProps & InjectedFormProps<FormProps, DispatchProps>): ReactElement => (
   <form onSubmit={handleSubmit}>
     <Field
@@ -47,12 +53,23 @@ const OrderComponent = ({
       normalize={capitalize}
     />
     <Field name="email" component={customInput} label="Email" type="email" validate={[required]} />
-    <button type="submit">Оформить</button>
+    <Field
+      name="phone"
+      component={numberInput}
+      label="Номер телефона"
+      type="text"
+      valodate={[required]}
+    />
+    <button type="submit" disabled={pristine || submitting}>
+      Оформить
+    </button>
+    <button type="button" onClick={handleClear}>
+      Очистить
+    </button>
   </form>
 );
 
 export const OrderForm = reduxForm<FormProps, DispatchProps>({
   form: 'order',
-  asyncValidate,
-  asyncBlurFields: ['email'],
+  validate,
 })(OrderComponent);

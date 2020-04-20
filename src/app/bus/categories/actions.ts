@@ -1,12 +1,15 @@
 // Types
 import {
   Categories,
-  FILL_CATEGORIES,
   CATEGORIES_FETCH_ASYNC,
   CATEGORIES_START_FETCHING,
   CATEGORIES_STOP_FETCHING,
   CategoriesActionTypes,
   CategoriesFillAction,
+  Category,
+  FILL_CATEGORIES,
+  RESET_CATEGORY,
+  SET_CURRENT_CATEGORY,
 } from './type';
 
 // Sync
@@ -26,6 +29,19 @@ export function fillCategories(categories: Categories): CategoriesFillAction {
   return {
     type: FILL_CATEGORIES,
     payload: categories,
+  };
+}
+
+export function setCategory(category: Category): CategoriesActionTypes {
+  return {
+    type: SET_CURRENT_CATEGORY,
+    payload: category,
+  };
+}
+
+export function resetCategory(): CategoriesActionTypes {
+  return {
+    type: RESET_CATEGORY,
   };
 }
 

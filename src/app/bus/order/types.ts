@@ -25,13 +25,4 @@ type OrderStopFetchingAction = {
   type: typeof ORDER_STOP_FETCHING;
 };
 
-export const ORDER_CLEAR_FORM = 'ORDER_CLEAR_FORM';
-type OrderClearFormAction = {
-  type: typeof ORDER_CLEAR_FORM;
-};
-
-export type OrderActionTypes =
-  | OrderFillAction
-  | OrderStartFetchingAction
-  | OrderStopFetchingAction
-  | OrderClearFormAction;
+export type OrderActionTypes = OrderFillAction | OrderStartFetchingAction | OrderStopFetchingAction;

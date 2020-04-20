@@ -18,12 +18,7 @@ export const Basket: FC<PropTypes> = (): ReactElement => {
   const { basket } = useBasket();
 
   const cartItems = basket.products.length > 0 ? (
-    basket.products.map((product) => (
-      <>
-        <ProductTile key={product.id} product={product} />
-        <Order />
-      </>
-    ))
+    basket.products.map((product) => <ProductTile key={product.id} product={product} />)
   ) : (
     <div>Товаров нет в корзине...</div>
   );
@@ -32,6 +27,7 @@ export const Basket: FC<PropTypes> = (): ReactElement => {
       <h1>Корзина</h1>
       <BasketInfo />
       <ul>{cartItems}</ul>
+      {basket.products.length > 0 && <Order />}
     </section>
   );
 };

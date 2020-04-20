@@ -1,0 +1,74 @@
+.order {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 15px;
+    min-height: 100vh;
+    background-color: #16161a;
+    color: wheat;
+}
+
+.order h1 {
+    font-size: 50px;
+}
+
+.order form {
+    display: flex;
+    flex-direction: column;
+}
+
+.order form input {
+    background-color: transparent;
+    color: wheat;
+    outline: none;
+    border-width: 2px;
+    border-style: solid;
+    border-color: currentColor;
+    border-radius: 7px;
+    padding: 5px 10px;
+    transition: border-color 0.3s ease;
+}
+
+.order form input::selection {
+    background-color: cornflowerblue;
+}
+
+.order form input:focus {
+    border-color: cornflowerblue;
+}
+
+.order form input:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.order form button {
+    min-width: 120px;
+    height: 35px;
+    background-color: transparent;
+    color: wheat;
+    outline: 0;
+    border: 2px solid currentColor;
+    border-radius: 7px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.order form button:hover {
+    color: cornflowerblue;
+}
+
+.order form button:not(:last-child) {
+    margin-right: 15px;
+}
+
+.order.disabled {
+    color: grey;
+    cursor: progress;
+}
+
+.order.disabled:hover {
+    color: grey;
+}

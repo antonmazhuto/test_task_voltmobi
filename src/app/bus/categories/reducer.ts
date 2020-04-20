@@ -1,0 +1,51 @@
+// Types
+import {
+  Categories,
+  CATEGORIES_FETCH_ASYNC,
+  CATEGORIES_START_FETCHING,
+  CATEGORIES_STOP_FETCHING,
+  CategoriesActionTypes,
+  FILL_CATEGORIES,
+} from './type';
+
+export type CategoriesState = {
+  data: Categories;
+  isFetching: boolean;
+};
+
+const initialState: CategoriesState = {
+  data: {
+    results: [],
+  },
+  isFetching: false,
+};
+
+export const categoriesReducer = (
+  state = initialState,
+  action: CategoriesActionTypes,
+): CategoriesState => {
+  switch (action.type) {
+    case CATEGORIES_START_FETCHING:
+      return { ...state, isFetching: true };
+
+    case CATEGORIES_STOP_FETCHING:
+      return { ...state, isFetching: false };
+
+    case FILL_CATEGORIES:
+      return {
+        ...state,
+        data: {
+          ...action.payload,
+        },
+      };
+
+    case CATEGORIES_FETCH_ASYNC:
+      return state;
+
+    default:
+      // eslint-disable-next-line no-case-declarations,@typescript-eslint/no-unused-vars
+      const x: never = action;
+  }
+
+  return state;
+};
